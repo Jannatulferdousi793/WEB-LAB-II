@@ -1,0 +1,5 @@
+GET /tasks -> 200 OK
+GET /task/2 -> 200 OK
+GET /task/999 -> 404 { "error": "Task not found" }
+GET /task/abc -> 400 { "error": "Invalid ID format" }
+GET /health -> 200 { "status": "healthy", "uptime": ... }

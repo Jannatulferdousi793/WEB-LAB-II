@@ -27,6 +27,23 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', uptime: process.uptime() });
 });
 
+app.get('/task/:id', (req, res) => {
+  const idStr = req.params.id;
+  const id = parseInt(idStr, 10);
+
+  // invalid ID format
+  if (isNaN(id) || id <= 0) {
+    return res.status(400).json({ error: 'Invalid ID format' });
+  }
+
+  const task = tasks.find(t => t.id === id);
+  if (!task) {
+    return res.status(404).json({ error: 'Task not found' });
+  }
+
+  res.json(task);
+});
+
 
 
 
